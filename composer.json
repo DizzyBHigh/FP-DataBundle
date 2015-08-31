@@ -1,0 +1,37 @@
+{
+  "name": "FP-DataBundle",
+  "description": "Symfony2 Bundle ",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "dizzyBHigh",
+      "email": "dizzy@fantasyallpro.com"
+    }
+  ],
+  "keywords": [
+    "FantasyPro DataBundle"
+  ],
+  "license": [
+    "MIT"
+  ],
+  "require": {
+    "DizzyBHigh/fantasy-data-api": "2.1.2"
+  },
+  "autoload": {
+    "psr-0": {
+      "FantasyPro\\DataBundle": ""
+    }
+  },
+  "target-dir": "FantasyPro/DataBundle",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/DizzyBHigh/FantasyDataAPI-v2"
+    }
+  ],
+  "extra": {
+    "branch-alias": {
+      "dev-master": "some_version-dev"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{% extends '@Design/Default/layout-home.html.twig' %}
+{% block body %}
+    <div class="container">
+        <div class="row-fluid">
+            <div class="col-lg-10 col-lg-offset-1 bg-success">
+                Output Here
+
+                {% for entry in log %}
+                    <div class="row">{{ entry.action }} : {{ entry.itemID }} - {{ entry.itemName }}</div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

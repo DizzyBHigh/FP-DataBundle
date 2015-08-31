@@ -1,0 +1,27 @@
+update_stadiums:
+    path:     /update/staduims
+    defaults: { _controller: DataBundle:Default:updateStadium }
+
+update_teams:
+    path:     /update/teams
+    defaults: { _controller: DataBundle:Default:updateTeam }
+
+update_players:
+    path:     /update/players
+    defaults: { _controller: DataBundle:Default:updatePlayer }
+
+update_schedules:
+    path:     /update/schedule
+    defaults: { _controller: DataBundle:Default:updateSchedule }
+
+update_timeframes:
+    path:     /update/timeframe
+    defaults: { _controller: DataBundle:Default:updateTimeFrame }
+
+update_news:
+    path:     /update/news
+    defaults: { _controller: DataBundle:Default:updateNews }
+
+add_crontask:
+    path:     /chrontasks/add
+    defaults: { _controller: DataBundle:Default:cronAdd }
