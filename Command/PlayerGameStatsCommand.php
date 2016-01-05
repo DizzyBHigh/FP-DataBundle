@@ -142,7 +142,7 @@ class PlayerGameStatsCommand extends ContainerAwareCommand
             $playerGameProgress->setMessage(
                 "Processing ".$thisCommand." - ".$playerGameStat['Name'].", ".$playerGameStat['Position']
             );
-            if ($type == 'none') {
+            if ($type == 'normal') {
                 $container->get( 'playergame_persister' )->Persist( $playerGameStat );
             }
             if ($type == 'projected') {

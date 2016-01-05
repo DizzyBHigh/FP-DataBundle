@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FantasyDefenseGame
  *
- * @ORM\Table(name="fp_fantasyDefenseGame")
+ * @ORM\Table(name="fd_fantasyDefenseGame")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\FantasyDefenseGameRepository")
  */
 class FantasyDefenseGame
@@ -440,6 +440,11 @@ class FantasyDefenseGame
      * @ORM\Column(type="integer", nullable=true, name="victivSalary")
      */
     private $victivSalary;
+
+    /**
+     * 
+     */
+    private $player;
 
     /**
      * Get id

@@ -56,7 +56,7 @@ class StandingsCommand extends ContainerAwareCommand
 
         $standingProgress = new ProgressBar( $output, $standings->count() );
         $standingProgress->setFormat(
-            "%message%\n Standing %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n Standing %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $standingProgress->setMessage( $taskMessage );
         $standingProgress->setBarCharacter( "<comment>=</comment>" );

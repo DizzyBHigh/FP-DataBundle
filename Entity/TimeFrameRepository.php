@@ -17,7 +17,7 @@ class TimeFrameRepository extends EntityRepository
      */
     public function getSeasonType()
     {
-        $timeFrame = $this->currentTimeFrame();
+        $timeFrame = $this->getCurrentTimeFrame();
 
         return $timeFrame->getSeasonType();
     }
@@ -27,7 +27,7 @@ class TimeFrameRepository extends EntityRepository
      */
     public function getCurrentSeason()
     {
-        $timeFrame = $this->currentTimeFrame();
+        $timeFrame = $this->getCurrentTimeFrame();
 
         return $timeFrame->getSeason();
     }
@@ -37,7 +37,7 @@ class TimeFrameRepository extends EntityRepository
      */
     public function getLastSeason()
     {
-        $timeFrame     = $this->currentTimeFrame();
+        $timeFrame     = $this->getCurrentTimeFrame();
         $currentSeason = $timeFrame->getSeason();
         $lastSeason    = $currentSeason - 1;
 
@@ -49,7 +49,7 @@ class TimeFrameRepository extends EntityRepository
      */
     public function getCurrentWeek()
     {
-        $timeFrame = $this->currentTimeFrame();
+        $timeFrame = $this->getCurrentTimeFrame();
 
         return $timeFrame->getWeek();
     }
@@ -58,11 +58,13 @@ class TimeFrameRepository extends EntityRepository
      * @return TimeFrame
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function currentTimeFrame()
+    public function getCurrentTimeFrame()
     {
+        $date = new \DateTime();
         return $this->createQueryBuilder( 'q' )
-                    ->andWhere( 'q.startDate < :startdate AND q.endDate > :startdate' )
-                    ->setParameter( 'startdate', new \DateTime() )
+                    ->Where( 'q.startDate < :date1 AND q.endDate > :date2' )
+                    ->setParameter( 'date1', $date )
+                    ->setParameter( 'date2', $date )
                     ->getQuery()
                     ->getOneOrNullResult();
     }

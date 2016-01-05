@@ -61,7 +61,7 @@ class ByesCommand extends ContainerAwareCommand
 
         $ByeProgress = new ProgressBar( $output, $byes->count() );
         $ByeProgress->setFormat(
-            "%message%\n Bye %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n Bye %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $ByeProgress->setMessage( $taskMessage );
         $ByeProgress->setBarCharacter( "<comment>=</comment>" );

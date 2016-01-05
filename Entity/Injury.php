@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Injury
  *
- * @ORM\Table(name="fp_injury")
+ * @ORM\Table(name="fd_injury")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\InjuryRepository")
  */
 class Injury
@@ -124,6 +124,11 @@ class Injury
      * @ORM\Column(type="boolean", nullable=true, name="declaredInactive")
      */
     private $declaredInactive;
+
+    /**
+     * 
+     */
+    private $player;
 
 
     /**

@@ -119,7 +119,7 @@ class GetBoxScoreCommand extends ContainerAwareCommand
 
         $boxScoreProgress = new ProgressBar( $output, $boxScoreCount );
         $boxScoreProgress->setFormat(
-            "%message%\n BoxScores: %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n BoxScores: %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
 
         $boxScoreProgress->setMessage( "Running Command: ".$thisCommand );

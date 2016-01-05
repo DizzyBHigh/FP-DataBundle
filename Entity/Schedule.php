@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Schedule
  *
- * @ORM\Table(name="fp_schedule")
+ * @ORM\Table(name="fd_schedule")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\ScheduleRepository")
  */
 class Schedule
@@ -20,6 +20,13 @@ class Schedule
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=20, nullable=false, name="timeframeID")
+     */
+    private $timeframeID;
 
     /**
      * @var string
@@ -50,11 +57,32 @@ class Schedule
     private $week;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true, name="hrDate")
+     */
+    private $hrDate;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(type="datetime", nullable=true, name="date")
      */
     private $date;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="date", nullable=true, name="dateOnly")
+     */
+    private $dateOnly;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="time", nullable=true, name="timeOnly")
+     */
+    private $timeOnly;
 
     /**
      * @var string
@@ -107,6 +135,22 @@ class Schedule
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeframeID()
+    {
+        return $this->timeframeID;
+    }
+
+    /**
+     * @param string $timeframeID
+     */
+    public function setTimeframeID( $timeframeID )
+    {
+        $this->timeframeID = $timeframeID;
     }
 
     /**
@@ -228,6 +272,56 @@ class Schedule
     {
         return $this->date;
     }
+
+    /**
+    * @return string
+    */
+    public function getHrDate()
+    {
+        return $this->hrDate;
+    }/**
+     * @param string $hrDate
+     */
+    public function setHrDate( $hrDate )
+    {
+        $this->hrDate = $hrDate;
+    }
+
+
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateOnly()
+    {
+        return $this->dateOnly;
+    }
+
+    /**
+     * @param \DateTime $dateOnly
+     */
+    public function setDateOnly( $dateOnly )
+    {
+        $this->dateOnly = $dateOnly;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getTimeOnly()
+    {
+        return $this->timeOnly;
+    }
+
+    /**
+     * @param \DateTime $timeOnly
+     */
+    public function setTimeOnly( $timeOnly )
+    {
+        $this->timeOnly = $timeOnly;
+    }
+
+
 
     /**
      * Set awayTeam

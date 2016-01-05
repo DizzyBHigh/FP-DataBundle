@@ -9,18 +9,18 @@
 namespace FantasyPro\DataBundle\Persisters;
 
 use Doctrine\ORM\EntityManager;
-use FantasyPro\DataBundle\Builder\DailyFantasyPlayerBuilder;
-use FantasyPro\DataBundle\Entity\DailyFantasyPlayer;
+use FantasyPro\DataBundle\Builder\FantasyPlayerBuilder;
+use FantasyPro\DataBundle\Entity\FantasyPlayer;
 use FantasyPro\DataBundle\Helpers\DateHelper;
 
-class DailyFantasyPlayerPersister
+class FantasyPlayerPersister
 {
     /**
      * @var EntityManager $em
      */
     private $em;
     /**
-     * @var DailyFantasyPlayerBuilder $builder
+     * @var FantasyPlayerBuilder $builder
      */
     private $builder;
 
@@ -29,38 +29,37 @@ class DailyFantasyPlayerPersister
      */
     private $dateHelper;
 
-    public function __construct( EntityManager $em, DailyFantasyPlayerBuilder $builder, DateHelper $dateHelper )
+    public function __construct( EntityManager $em, FantasyPlayerBuilder $builder, DateHelper $dateHelper )
     {
         $this->em         = $em;
         $this->builder    = $builder;
         $this->dateHelper = $dateHelper;
     }
 
-    public function Persist( $dailyFantasyPlayer )
+    public function Persist( $fantasyPlayer )
     {
         //disable Logging to speed things up....
         $this->em->getConnection()->getConfiguration()->setSQLLogger( null );
 
-        $repo = $this->em->getRepository( 'DataBundle:DailyFantasyPlayer' );
+        $repo = $this->em->getRepository( 'DataBundle:FantasyPlayer' );
         $criteria = array(
-            'player' => $dailyFantasyPlayer['PlayerID'],
-            'date'   => $this->dateHelper->parseDate( $dailyFantasyPlayer['Date'] )
+            'playerID' => $fantasyPlayer['PlayerID'],
         );
 
         //get the dailyFantasyPlayer from the repo
         /**
-         * @var DailyFantasyPlayer $currentDailyFantasyPlayer
+         * @var FantasyPlayer $currentFantasyPlayer
          */
-        $currentDailyFantasyPlayer = $repo->FindOneBy( $criteria );
+        $currentFantasyPlayer = $repo->FindOneBy( $criteria );
 
         //build the dailyFantasyPlayer entity
-        $currentDailyFantasyPlayer = $this->builder->buildDailyFantasyPlayer(
-            $currentDailyFantasyPlayer,
-            $dailyFantasyPlayer
+        $currentFantasyPlayer = $this->builder->buildFantasyPlayer(
+            $currentFantasyPlayer,
+            $fantasyPlayer
         );
 
         //persist the dailyFantasyPlayer
-        $this->em->persist( $currentDailyFantasyPlayer );
+        $this->em->persist( $currentFantasyPlayer );
         $this->em->flush();
         $this->em->clear();
 

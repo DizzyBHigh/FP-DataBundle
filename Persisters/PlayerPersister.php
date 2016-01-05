@@ -40,7 +40,7 @@ class PlayerPersister
         $uow  = $this->em->getUnitOfWork();
 
         // Set the current team to fetch from the db
-        $criteria = array( 'playerID' => $player['PlayerID'] );
+        $criteria = array( 'id' => $player['PlayerID'] );
 
         //get the player from the repo
         /**

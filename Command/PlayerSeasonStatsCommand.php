@@ -113,7 +113,7 @@ class PlayerSeasonStatsCommand extends ContainerAwareCommand
 
         $playerSeasonProgress = new ProgressBar( $output, $playerSeasonStats->count() );
         $playerSeasonProgress->setFormat(
-            "%message%\n ".$fetchType." %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n ".$fetchType." %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $playerSeasonProgress->setMessage( $taskMessage );
         $playerSeasonProgress->setBarCharacter( "<comment>=</comment>" );

@@ -28,7 +28,7 @@ class PlayerGameBuilder
         $currentPlayerGame->setPlayerID( $playerGame['PlayerID'] );
         $currentPlayerGame->setSeasonType( $playerGame['SeasonType'] );
         $currentPlayerGame->setSeason( $playerGame['Season'] );
-        $currentPlayerGame->setGameDate( $playerGame['GameDate'] );
+        $currentPlayerGame->setGameDate( $this->dateHelper->parseDate( $playerGame['GameDate'] ));
         $currentPlayerGame->setWeek( $playerGame['Week'] );
         $currentPlayerGame->setTeam( $playerGame['Team'] );
         $currentPlayerGame->setOpponent( $playerGame['Opponent'] );

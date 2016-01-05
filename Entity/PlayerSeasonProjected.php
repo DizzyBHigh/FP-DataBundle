@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PlayerSeasonProjected
  *
- * @ORM\Table(name="fp_playerSeasonProjected")
+ * @ORM\Table(name="fd_playerSeasonProjected")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\PlayerSeasonProjectedRepository")
  */
 class PlayerSeasonProjected
@@ -881,6 +881,11 @@ class PlayerSeasonProjected
      * @ORM\Column(type="integer", nullable=true, name="auctionValuePPR")
      */
     private $auctionValuePPR;
+
+    /**
+     * 
+     */
+    private $player;
 
     /**
      * Get id

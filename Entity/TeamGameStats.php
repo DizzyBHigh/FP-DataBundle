@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TeamGameStats
  *
- * @ORM\Table(name="fp_teamGameStats")
+ * @ORM\Table(name="fd_teamGameStats")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\TeamGameStatsRepository")
  */
 class TeamGameStats

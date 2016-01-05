@@ -2,28 +2,36 @@
 
 namespace FantasyPro\DataBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Player
  *
- * @ORM\Table(name="fp_player")
+ * @ORM\Table(name="fd_player")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\PlayerRepository")
  */
 class Player
-{
+    {
+
+    public function __construct()
+    {
+        $this->contestEntries = new ArrayCollection();
+        $this->dailyFantasyPlayers = new ArrayCollection();
+    }
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer", length=32, name="playerID")
+     * @ORM\Column(type="integer", length=32, name="id")
+     * 
      * @ORM\Id
      */
-    private $playerID;
+    private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=10, nullable=true, name="Team")
+     * @ORM\Column(type="string", length=10, nullable=true, name="team")
      */
     private $team;
 
@@ -308,29 +316,38 @@ class Player
 
     private $injuryStatus;
 
+    /**
+     *   @ORM\ManyToMany(targetEntity="FantasyPro\GameBundle\Entity\ContestEntry", mappedBy="players")
+     */
+    private $contestEntries;
 
     /**
-     * Set playerID
+     *   @ORM\OneToMany(targetEntity="FantasyPro\DataBundle\Entity\DailyFantasyPlayer", mappedBy="player")
+     */
+    private $dailyFantasyPlayers;
+
+    /**
+     * Set id
      *
-     * @param integer $playerID
+     * @param integer $id
      *
      * @return Player
      */
-    public function setPlayerID( $playerID )
+    public function setId( $id )
     {
-        $this->playerID = $playerID;
+        $this->id = $id;
 
         return $this;
     }
 
     /**
-     * Get playerID
+     * Get id
      *
      * @return integer
      */
-    public function getPlayerID()
+    public function getId()
     {
-        return $this->playerID;
+        return $this->id;
     }
 
     /**
@@ -1307,5 +1324,71 @@ class Player
     public function setInjuryStatus( $injuryStatus )
     {
         $this->injuryStatus = $injuryStatus;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getContestEntries()
+    {
+        return $this->contestEntries;
+    }
+
+    /**
+     * @param null $ContestEntries
+     *
+     */
+    public function setContestEntries( $ContestEntries = null)
+    {
+        $this->contestEntries = $ContestEntries;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDailyFantasyPlayers()
+    {
+        return $this->dailyFantasyPlayers;
+    }
+
+    /**
+     * @param DailyFantasyPlayer $dailyFantasyPlayers
+     *
+     */
+    public function setDailyFantasyPlayers( DailyFantasyPlayer $dailyFantasyPlayers = null)
+    {
+        $this->dailyFantasyPlayers = $dailyFantasyPlayers;
+    }
+
+    /**
+     * @param DailyFantasyPlayer $dailyFantasyPlayers
+     *
+     * @return ArrayCollection
+     *
+     */
+    public function addDailyFantasyPlayers(DailyFantasyPlayer $dailyFantasyPlayers = null)
+    {
+        if(! $this->dailyFantasyPlayers->contains($dailyFantasyPlayers)){
+            $this->dailyFantasyPlayers->add($dailyFantasyPlayers);
+        }
+
+        return $this->dailyFantasyPlayers;
+    }
+
+    /**
+     * @param DailyFantasyPlayer $dailyFantasyPlayers
+     *
+     * @return ArrayCollection
+     *
+     */
+    public function removeDailyFantasyPlayers(DailyFantasyPlayer $dailyFantasyPlayers)
+    {
+        if($this->dailyFantasyPlayers->contains($dailyFantasyPlayers)){
+            $this->dailyFantasyPlayers->removeElement($dailyFantasyPlayers);
+        }
+
+        return $this->dailyFantasyPlayers;
     }
 }

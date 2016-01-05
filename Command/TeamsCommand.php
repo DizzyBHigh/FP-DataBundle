@@ -61,7 +61,7 @@ class TeamsCommand extends ContainerAwareCommand
         $taskMessage  = "Running Command: ".$thisCommand;
         $teamProgress = new ProgressBar( $output, $teamData->count() );
         $teamProgress->setFormat(
-            "%message%\n Team %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n Team %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $teamProgress->setMessage( $taskMessage );
         $teamProgress->setBarCharacter( "<comment>=</comment>" );

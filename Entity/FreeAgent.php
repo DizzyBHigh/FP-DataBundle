@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * FreeAgents
  *
- *
+ * @ORM\Table(name="fd_freeAgents")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\FreeAgentRepository")
  */
 class FreeAgent

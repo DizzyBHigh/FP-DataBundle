@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Team
  *
- * @ORM\Table()
+ * @ORM\Table(name="fd_team")
  * @ORM\Entity
  */
 class Team
@@ -15,7 +15,7 @@ class Team
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(type="integer", name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -24,147 +24,147 @@ class Team
     /**
      * @var string
      *
-     * @ORM\Column(name="teamKey", type="string", length=10)
+     * @ORM\Column(type="string", length=10, nullable=true, name="teamKey")
      */
     private $teamKey;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="teamID", type="integer")
+     * @ORM\Column(type="integer", nullable=true, name="teamID")
      */
     private $teamID;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="playerID", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="playerID")
      */
     private $playerID;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="city")
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="name")
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="conference", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="conference")
      */
     private $conference;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="division", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="division")
      */
     private $division;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="fullName", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="fullName")
      */
     private $fullName;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="stadiumID", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="stadiumID")
      */
     private $stadiumID;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="byeWeek", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="byeWeek")
      */
     private $byeWeek;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="averageDraftPosition", type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, name="averageDraftPosition")
      */
     private $averageDraftPosition;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="averageDraftPositionPPR", type="decimal", nullable=true)
+     * @ORM\Column(type="decimal", nullable=true, name="averageDraftPositionPPR")
      */
     private $averageDraftPositionPPR;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="headCoach", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="headCoach")
      */
     private $headCoach;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="offensiveCoordinator", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="offensiveCoordinator")
      */
     private $offensiveCoordinator;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="defensiveCoordinator", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="defensiveCoordinator")
      */
     private $defensiveCoordinator;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="specialTeamsCoach", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="specialTeamsCoach")
      */
     private $specialTeamsCoach;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="offensiveScheme", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="offensiveScheme")
      */
     private $offensiveScheme;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="defensiveScheme", type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, name="defensiveScheme")
      */
     private $defensiveScheme;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="upcomingSalary", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="upcomingSalary")
      */
     private $upcomingSalary;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="upcomingOpponentRank", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="upcomingOpponentRank")
      */
     private $upcomingOpponentRank;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="upcomingOpponentPositionRank", type="integer", nullable=true)
+     * @ORM\Column(type="integer", nullable=true, name="upcomingOpponentPositionRank")
      */
     private $upcomingOpponentPositionRank;
 

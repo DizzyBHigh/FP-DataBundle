@@ -20,14 +20,23 @@ services:
     season_helper:
         class:        FantasyPro\DataBundle\Helpers\SeasonHelper
         arguments:    [@fantasyapi]
+
+    schedule_helper:
+        class:        FantasyPro\DataBundle\Helpers\ScheduleHelper
+        arguments:    [@doctrine.orm.fantasydata_entity_manager]
+
     # builders
     #The builders are called by the persiters, these builders are respnsible for setting up the data to be stored into the associated entities.
     byeBuilder:
         class:        FantasyPro\DataBundle\Builder\ByeBuilder
 
+    fantasyPlayerBuilder:
+        class:        FantasyPro\DataBundle\Builder\FantasyPlayerBuilder
+        arguments:    [@date_helper, @doctrine.orm.fantasydata_entity_manager]
+
     dailyFantasyPlayerBuilder:
         class:        FantasyPro\DataBundle\Builder\DailyFantasyPlayerBuilder
-        arguments:    [@date_helper]
+        arguments:    [@date_helper, @doctrine.orm.fantasydata_entity_manager]
 
     fantasyDefenseGameBuilder:
         class:        FantasyPro\DataBundle\Builder\FantasyDefenseGameBuilder
@@ -90,12 +99,12 @@ services:
         arguments:    [@date_helper]
 
     playerSeasonProjectedBuilder:
-            class:        FantasyPro\DataBundle\Builder\PlayerSeasonProjectedBuilder
-            arguments:    [@date_helper]
+        class:        FantasyPro\DataBundle\Builder\PlayerSeasonProjectedBuilder
+        arguments:    [@date_helper]
 
     scheduleBuilder:
         class:        FantasyPro\DataBundle\Builder\ScheduleBuilder
-        arguments:    [@date_helper]
+        arguments:    [@date_helper, @season_helper]
 
     scoreBuilder:
         class:        FantasyPro\DataBundle\Builder\ScoreBuilder
@@ -131,123 +140,127 @@ services:
 
     timeFrameBuilder:
         class:        FantasyPro\DataBundle\Builder\TimeFrameBuilder
-        arguments:    [@date_helper]
+        arguments:    [@date_helper, @season_helper]
 
     #persisters
     # These services are responsible for saving the data to the database, they require a Builder to set up the data to persist
 
     bye_persister:
         class: FantasyPro\DataBundle\Persisters\ByePersister
-        arguments: [@doctrine.orm.entity_manager, @byeBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @byeBuilder]
 
     dailyFantasyPlayer_persister:
         class: FantasyPro\DataBundle\Persisters\DailyFantasyPlayerPersister
-        arguments: [@doctrine.orm.entity_manager, @dailyFantasyPlayerBuilder, @date_helper]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @dailyFantasyPlayerBuilder, @date_helper]
+
+    fantasyPlayer_persister:
+            class: FantasyPro\DataBundle\Persisters\FantasyPlayerPersister
+            arguments: [@doctrine.orm.fantasydata_entity_manager, @fantasyPlayerBuilder, @date_helper]
 
     fantasyDefenceGame_persister:
         class: FantasyPro\DataBundle\Persisters\FantasyDefenseGamePersister
-        arguments: [@doctrine.orm.entity_manager, @fantasyDefenseGameBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @fantasyDefenseGameBuilder]
 
     fantasyDefenceSeason_persister:
         class: FantasyPro\DataBundle\Persisters\FantasyDefenseSeasonPersister
-        arguments: [@doctrine.orm.entity_manager, @fantasyDefenseSeasonBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @fantasyDefenseSeasonBuilder]
 
     fantasyDefenceProjectionsByGame_persister:
         class: FantasyPro\DataBundle\Persisters\FantasyDefenseProjectionsByGamePersister
-        arguments: [@doctrine.orm.entity_manager, @fantasyDefenceProjectionsByGameBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @fantasyDefenceProjectionsByGameBuilder]
 
     fantasyDefenceProjectionsBySeason_persister:
           class: FantasyPro\DataBundle\Persisters\FantasyDefenseProjectionsBySeasonPersister
-          arguments: [@doctrine.orm.entity_manager, @fantasyDefenceProjectionsBySeasonBuilder]
+          arguments: [@doctrine.orm.fantasydata_entity_manager, @fantasyDefenceProjectionsBySeasonBuilder]
 
     freeAgent_persister:
         class: FantasyPro\DataBundle\Persisters\FreeAgentPersister
-        arguments: [@doctrine.orm.entity_manager, @freeAgentBuilder, @date_helper]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @freeAgentBuilder, @date_helper]
 
     gameLeagueLeaders_persister:
         class: FantasyPro\DataBundle\Persisters\GameLeagueLeadersPersister
-        arguments: [@doctrine.orm.entity_manager, @gameLeagueLeadersBuilder, @date_helper]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @gameLeagueLeadersBuilder, @date_helper]
 
     gameStatsBySeason_persister:
         class: FantasyPro\DataBundle\Persisters\GameStatsBySeasonPersister
-        arguments: [@doctrine.orm.entity_manager, @gameStatsBySeasonBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @gameStatsBySeasonBuilder]
 
     gameStatsByWeek_persister:
         class: FantasyPro\DataBundle\Persisters\GameStatsByWeekPersister
-        arguments: [@doctrine.orm.entity_manager, @gameStatsByWeekBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @gameStatsByWeekBuilder]
 
     injury_persister:
         class: FantasyPro\DataBundle\Persisters\InjuryPersister
-        arguments: [@doctrine.orm.entity_manager, @injuryBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @injuryBuilder]
 
     news_persister:
         class: FantasyPro\DataBundle\Persisters\NewsPersister
-        arguments: [@doctrine.orm.entity_manager, @newsBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @newsBuilder]
 
     player_persister:
         class: FantasyPro\DataBundle\Persisters\PlayerPersister
-        arguments: [@doctrine.orm.entity_manager, @playerBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @playerBuilder]
 
     playergame_persister:
         class: FantasyPro\DataBundle\Persisters\PlayerGamePersister
-        arguments: [@doctrine.orm.entity_manager, @playerGameBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @playerGameBuilder]
 
     boxplayergame_persister:
         class: FantasyPro\DataBundle\Persisters\BoxPlayerGamePersister
-        arguments: [@doctrine.orm.entity_manager, @boxPlayerGameBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @boxPlayerGameBuilder]
 
     playergameprojectedstats_persister:
         class: FantasyPro\DataBundle\Persisters\PlayerGameProjectedStatsPersister
-        arguments: [@doctrine.orm.entity_manager, @playerGameProjectedStatsBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @playerGameProjectedStatsBuilder]
 
     playerSeason_persister:
         class: FantasyPro\DataBundle\Persisters\PlayerSeasonPersister
-        arguments: [@doctrine.orm.entity_manager, @playerSeasonBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @playerSeasonBuilder]
 
     playerSeasonProjected_persister:
         class: FantasyPro\DataBundle\Persisters\PlayerSeasonProjectedPersister
-        arguments: [@doctrine.orm.entity_manager, @playerSeasonProjectedBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @playerSeasonProjectedBuilder]
 
     schedule_persister:
         class: FantasyPro\DataBundle\Persisters\SchedulePersister
-        arguments: [@doctrine.orm.entity_manager, @scheduleBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @scheduleBuilder]
 
     score_persister:
         class: FantasyPro\DataBundle\Persisters\ScorePersister
-        arguments: [@doctrine.orm.entity_manager, @scoreBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @scoreBuilder]
 
     scoringdetail_persister:
         class: FantasyPro\DataBundle\Persisters\ScoringDetailPersister
-        arguments: [@doctrine.orm.entity_manager, @scoringDetailBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @scoringDetailBuilder]
 
     scoringplay_persister:
         class: FantasyPro\DataBundle\Persisters\ScoringPlayPersister
-        arguments: [@doctrine.orm.entity_manager, @scoringPlayBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @scoringPlayBuilder]
 
     seasonLeagueLeaders_persister:
         class: FantasyPro\DataBundle\Persisters\SeasonLeagueLeadersPersister
-        arguments: [@doctrine.orm.entity_manager, @seasonLeagueLeadersBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @seasonLeagueLeadersBuilder]
 
     stadium_persister:
         class: FantasyPro\DataBundle\Persisters\StadiumPersister
-        arguments: [@doctrine.orm.entity_manager, @stadiumBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @stadiumBuilder]
 
     standing_persister:
         class: FantasyPro\DataBundle\Persisters\StandingPersister
-        arguments: [@doctrine.orm.entity_manager, @standingBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @standingBuilder]
 
     team_persister:
         class: FantasyPro\DataBundle\Persisters\TeamPersister
-        arguments: [@doctrine.orm.entity_manager, @teamBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @teamBuilder]
 
     teamGameStats_persister:
         class: FantasyPro\DataBundle\Persisters\TeamGameStatsPersister
-        arguments: [@doctrine.orm.entity_manager, @teamGameStatsBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @teamGameStatsBuilder]
 
     teamSeasonStats_persister:
         class: FantasyPro\DataBundle\Persisters\TeamSeasonStatsPersister
-        arguments: [@doctrine.orm.entity_manager, @teamSeasonStatsBuilder]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @teamSeasonStatsBuilder]
 
     timeframe_persister:
         class: FantasyPro\DataBundle\Persisters\TimeFramePersister
-        arguments: [@doctrine.orm.entity_manager, @timeFrameBuilder, @date_helper]
+        arguments: [@doctrine.orm.fantasydata_entity_manager, @timeFrameBuilder, @date_helper]

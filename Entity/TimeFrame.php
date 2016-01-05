@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * TimeFrame
  *
- * @ORM\Table(name="fp_timeFrame")
+ * @ORM\Table(name="fd_timeframe")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\TimeFrameRepository")
  */
 class TimeFrame
@@ -20,6 +20,13 @@ class TimeFrame
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=20, nullable=false, name="timeframeID")
+     */
+    private $timeframeID;
 
     /**
      * @var integer
@@ -143,6 +150,24 @@ class TimeFrame
     {
         return $this->id;
     }
+
+    /**
+     * @return string
+     */
+    public function getTimeframeID()
+    {
+        return $this->timeframeID;
+    }
+
+    /**
+     * @param string $timeframeID
+     */
+    public function setTimeframeID( $timeframeID )
+    {
+        $this->timeframeID = $timeframeID;
+    }
+
+
 
     /**
      * @return int

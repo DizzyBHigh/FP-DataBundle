@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * News
  *
- * @ORM\Table(name="fp_news")
+ * @ORM\Table(name="fd_news")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\NewsRepository")
  */
 class News
@@ -75,6 +75,11 @@ class News
      * @ORM\Column(type="integer", nullable=true, name="playerID")
      */
     private $playerID;
+
+    /**
+     * 
+     */
+    private $player;
 
     /**
      * Set newsID

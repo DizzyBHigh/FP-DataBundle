@@ -8,64 +8,65 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Stadium
  *
- * @ORM\Table("fp_stadium")
+ * @ORM\Table(name="fd_stadium")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\StadiumRepository")
  */
 class Stadium
 {
     /**
-     * @ORM\Id @ORM\Column(type="integer")
+     * @ORM\Id 
+     * @ORM\Column(type="integer")
      *
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="stadiumID", type="integer", length=32, nullable=false, unique=true)
+     * @ORM\Column(type="integer", unique=true, length=32, nullable=false, name="stadiumID")
      */
     private $stadiumID;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @ORM\Column(type="string", length=100, nullable=false, name="name")
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50, nullable=false, name="city")
      */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="state", type="string", length=10, nullable=true)
+     * @ORM\Column(type="string", length=10, nullable=true, name="state")
      */
     private $state;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=2, nullable=false)
+     * @ORM\Column(type="string", length=2, nullable=false, name="country")
      */
     private $country;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="capacity", type="integer", length=32, nullable=true)
+     * @ORM\Column(type="integer", length=32, nullable=true, name="capacity")
      */
     private $capacity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="playingSurface", type="string", length=50, nullable=true)
+     * @ORM\Column(type="string", length=50, nullable=true, name="playingSurface")
      */
     private $playingSurface;
 

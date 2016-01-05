@@ -36,7 +36,7 @@ class StadiumsCommand extends ContainerAwareCommand
 
         $stadiumProgress = new ProgressBar( $output, $stadiums->count() );
         $stadiumProgress->setFormat(
-            "%message%\n stadium %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n stadium %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $stadiumProgress->setMessage( $taskMessage );
         $stadiumProgress->setBarCharacter( "<comment>=</comment>" );

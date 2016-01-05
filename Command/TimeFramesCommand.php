@@ -46,7 +46,7 @@ class TimeFramesCommand extends ContainerAwareCommand
 
         $timeframeProgress = new ProgressBar( $output, $timeframes->count() );
         $timeframeProgress->setFormat(
-            "%message%\n Timeframe %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n Timeframe %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $timeframeProgress->setMessage( $taskMessage );
         $timeframeProgress->setBarCharacter( "<comment>=</comment>" );

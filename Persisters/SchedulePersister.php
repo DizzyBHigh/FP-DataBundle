@@ -39,6 +39,10 @@ class SchedulePersister
         $repo = $this->em->getRepository( 'DataBundle:Schedule' );
         $uow  = $this->em->getUnitOfWork();
 
+        //check to see if we have a gamekey (otherwise its a BYE )
+        if(is_null($schedule['GameKey'])){
+            return;
+        }
         // Set the current team to fetch from the db
         $criteria = array( 'gameKey' => $schedule['GameKey'] );
 
@@ -47,8 +51,6 @@ class SchedulePersister
          * @var Schedule $currentSchedule
          */
         $currentSchedule = $repo->FindOneBy( $criteria );
-
-        //todo: use a logger to write this data to file
 
         //build the schedule entity
         $currentSchedule = $this->builder->buildSchedule( $currentSchedule, $schedule );

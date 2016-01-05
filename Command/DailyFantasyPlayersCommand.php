@@ -28,7 +28,7 @@ class DailyFantasyPlayersCommand extends ContainerAwareCommand
     protected function execute( InputInterface $input, OutputInterface $output )
     {
         $container = $this->getContainer();
-
+        $em = $container->get('doctrine.orm.entity_manager');
         // get the data fetcher
         $fetcher     = $container->get( 'data_fetcher' );
         $dateHelper  = $container->get( 'date_helper' );
@@ -49,7 +49,7 @@ class DailyFantasyPlayersCommand extends ContainerAwareCommand
 
         $DailyFantasyPlayerProgress = new ProgressBar( $output, $dailyFantasyPlayers->count() );
         $DailyFantasyPlayerProgress->setFormat(
-            "%message%\n DailyFantasyPlayer %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n DailyFantasyPlayer %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $DailyFantasyPlayerProgress->setMessage( $taskMessage );
         $DailyFantasyPlayerProgress->setBarCharacter( "<comment>=</comment>" );
@@ -58,6 +58,9 @@ class DailyFantasyPlayersCommand extends ContainerAwareCommand
         // the progress character
         $DailyFantasyPlayerProgress->setProgressCharacter( '>' );
         $DailyFantasyPlayerProgress->start();
+
+        //delete existing dailyfantasyplayers
+        //$em->createQuery('DELETE FROM DataBundle:DailyFantasyPlayer')->execute();
 
         foreach ($dailyFantasyPlayers as $DailyFantasyPlayer) {
             $container->get( 'dailyFantasyPlayer_persister' )->Persist( $DailyFantasyPlayer );

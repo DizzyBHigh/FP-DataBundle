@@ -7,31 +7,29 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * DailyFantasyPlayer
  *
- * @ORM\Table(name="fp_dailyFantasyplayer")
+ * @ORM\Table(name="fd_dailyFantasyplayer")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\DailyFantasyPlayerRepository")
  */
 class DailyFantasyPlayer
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(type="integer", name="id")
      * @ORM\Id
+     * @ORM\Column(type="integer", name="id")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(type="integer", nullable=true, name="playerID")
+     * @ORM\ManyToOne(targetEntity="Player", inversedBy="dailyFantasyPlayers")
+     * @ORM\JoinColumn(name="player")
      */
-    private $playerID;
+    private $player;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime", nullable=true, name="date")
+     * @ORM\Column(type="date", nullable=true, name="date")
      */
     private $date;
 
@@ -126,7 +124,6 @@ class DailyFantasyPlayer
      */
     private $statusColor;
 
-
     /**
      * Get id
      *
@@ -135,30 +132,6 @@ class DailyFantasyPlayer
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set playerID
-     *
-     * @param integer $playerID
-     *
-     * @return DailyFantasyPlayer
-     */
-    public function setPlayerID( $playerID )
-    {
-        $this->playerID = $playerID;
-
-        return $this;
-    }
-
-    /**
-     * Get playerID
-     *
-     * @return integer
-     */
-    public function getPlayerID()
-    {
-        return $this->playerID;
     }
 
     /**
@@ -417,7 +390,6 @@ class DailyFantasyPlayer
         $this->opponentPositionRank = $opponentPositionRank;
     }
 
-
     /**
      * Set status
      *
@@ -489,5 +461,23 @@ class DailyFantasyPlayer
     {
         return $this->statusColor;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
+
+    /**
+     * @param mixed $player
+     */
+    public function setPlayer( $player )
+    {
+        $this->player = $player;
+    }
+
+
 }
 

@@ -24,7 +24,7 @@ class PlayerBuilder
         }
 
         // set the new values for the player
-        $currentPlayer->setPlayerID( $player['PlayerID'] );
+        $currentPlayer->setId( $player['PlayerID'] );
         $currentPlayer->setTeam( $player['Team'] );
         $currentPlayer->setNumber( $player['Number'] );
         $currentPlayer->setFirstName( $player['FirstName'] );

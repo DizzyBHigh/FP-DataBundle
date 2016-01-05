@@ -77,7 +77,7 @@ class PlayersCommand extends ContainerAwareCommand
         $taskMessage    = "Running Command: ".$thisCommand;
         $playerProgress = new ProgressBar( $output, $totalCount );
         $playerProgress->setFormat(
-            "%message%\n Player %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%\n"
+            "%message%\n Player %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $playerProgress->setMessage( $taskMessage );
         $playerProgress->setBarCharacter( "<comment>=</comment>" );

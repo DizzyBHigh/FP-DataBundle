@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Bye
  *
- * @ORM\Table(name="fp_bye")
+ * @ORM\Table(name="fd_bye")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\ByeRepository")
  */
 class Bye

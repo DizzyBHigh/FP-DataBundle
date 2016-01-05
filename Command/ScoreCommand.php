@@ -48,8 +48,6 @@ EOT
     {
         $container = $this->getContainer();
 
-        $em = $container->get( 'doctrine.orm.entity_manager' );
-        $em->getConnection()->getConfiguration()->setSQLLogger( null );
         // get the data fetcher
         $fetcher = $container->get( 'data_fetcher' );
 
@@ -81,7 +79,7 @@ EOT
         $scoreCount    = $scores->count();
         $scoreProgress = new ProgressBar( $output, $scoreCount );
         $scoreProgress->setFormat(
-            "%message%\n Score %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n Score %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
 
         $scoreProgress->setMessage( $taskMessage );

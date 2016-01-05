@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Standing
  *
- * @ORM\Table(name="fp_standing")
+ * @ORM\Table(name="fd_standing")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\StandingRepository")
  */
 class Standing

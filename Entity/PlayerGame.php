@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PlayerGame
  *
- * @ORM\Table(name="fp_playerGame")
+ * @ORM\Table(name="fd_playerGame")
  * @ORM\Entity(repositoryClass="FantasyPro\DataBundle\Entity\PlayerGameRepository")
  */
 class PlayerGame
@@ -1007,6 +1007,11 @@ class PlayerGame
      * @ORM\Column(type="integer", nullable=true, name="playerSeasonID")
      */
     private $playerSeasonID;
+
+    /**
+     * 
+     */
+    private $player;
 
 
     /**

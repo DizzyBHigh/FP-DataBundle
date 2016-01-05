@@ -33,13 +33,13 @@ class InitialiseDBCommand extends ContainerAwareCommand
         $output->writeln( '<comment>Initialising Database...</comment>' );
         $this->output = $output;
         $container    = $this->getContainer();
-        $em           = $container->get( 'doctrine.orm.entity_manager' );
+        $em           = $container->get( 'doctrine.orm.fantasydata_entity_manager' );
         $seasonHelper = $container->get( 'season_helper' );
 
         $fetcher = $container->get( 'data_fetcher' );
         // First set call the timeframe Command so we have the timeframes in the database.
         $timeFrameCommand = 'fetch_data:timeframes --type=all';
-        //$this->runCommand($timeFrameCommand);
+        $this->runCommand($timeFrameCommand);
 
         // now we have the timeframes in the db we retrive all the timeframes so we can loop through them and fetch the other data.
         $season = $season = $input->getOption( 'season' );
@@ -56,12 +56,12 @@ class InitialiseDBCommand extends ContainerAwareCommand
         $commandArray   = array();
         $consoleCommand = 'fetch_data:';
         //Players does not need season seasonType etc
-        //$players = $consoleCommand.'players';
-        //array_push($commandArray, $players);
+        $players = $consoleCommand.'players';
+        array_push($commandArray, $players);
 
         //Stadiums does not need season seasonType etc
-        //$stadiums = $consoleCommand.'stadiums';
-        // array_push($commandArray, $stadiums);
+        $stadiums = $consoleCommand.'stadiums';
+        array_push($commandArray, $stadiums);
         $lastSeason  = 0;
         $currentWeek = -1;
         foreach ($timeFrames as $timeframe) {
@@ -69,10 +69,8 @@ class InitialiseDBCommand extends ContainerAwareCommand
                 $season         = '--season='.$timeframe->getSeason();
                 $seasonTypeNum  = $timeframe->getSeasonType();
                 $seasonTypeText = $seasonHelper->convertSeasonTypeNum( $seasonTypeNum );
-                //var_dump($seasonTypeNum, $seasonTypeText);die();
                 $seasonType = '--seasonType='.$seasonTypeText;
                 $week       = '--week='.$timeframe->getWeek();
-
 
                 if ($seasonTypeNum != 4) {
                     $output->writeln(
@@ -148,18 +146,24 @@ class InitialiseDBCommand extends ContainerAwareCommand
                         $teams = $consoleCommand.'teams '.$season;
                         array_push( $commandArray, $teams );
                         $lastSeason = $timeframe->getSeason().$timeframe->getSeasonType();
+
+                        //$dailyFantasyPlayers = $consoleCommand.'dailyFantasyPlayers';
+                        //array_push($commandArray, $dailyFantasyPlayers);
                     }
                 }
+
             }
         }
+
         $commandCount = count( $commandArray );
         $output->writeln( '<comment>Starting run of '.$commandCount.' Commands </comment>' );
         $output->writeln( '<comment>...</comment>' );
         $output->writeln( '<comment>...</comment>' );
+
         foreach ($commandArray as $command) {
             $this->runCommand( $command );
         }
-
+        
         $output->writeln( '<comment>Finished!</comment>' );
     }
 

@@ -66,7 +66,7 @@ class NewsCommand extends ContainerAwareCommand
 
         $newsProgress = new ProgressBar( $output, $totalNewsCount );
         $newsProgress->setFormat(
-            "%message%\n News %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+            "%message%\n News %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
         );
         $newsProgress->setMessage( $taskMessage );
         $newsProgress->setBarCharacter( "<comment>=</comment>" );

@@ -6,7 +6,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Table(name="fp_chronTasks")
+ * @ORM\Table(name="fd_chronTasks")
  * @ORM\Entity
  * @UniqueEntity("name")
  */

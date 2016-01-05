@@ -21,10 +21,12 @@ class CronTasksRunCommand extends ContainerAwareCommand
 
     protected function execute( InputInterface $input, OutputInterface $output )
     {
+        $date = new \DateTime();
+        $date = $date->format('d/m/Y');
         $output->writeln( '<comment>Running Cron Tasks...</comment>' );
-
+        $output->writeln(sprintf( '<comment>DATE: %s</comment>', $date ));
         $this->output = $output;
-        $em           = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
+        $em  = $this->getContainer()->get( 'doctrine.orm.entity_manager' );
 
         $crontasks = $em->getRepository( 'DataBundle:CronTask' )->findAll();
 
@@ -32,42 +34,30 @@ class CronTasksRunCommand extends ContainerAwareCommand
             // Get the last run time of this task, and calculate when it should run next
             $lastrun = $crontask->getLastRun() ? $crontask->getLastRun()->format( 'U' ) : 0;
             $nextrun = $lastrun + $crontask->getInterval();
-
             // We must run this task if:
             // * time() is larger or equal to $nextrun
             $run = ( time() >= $nextrun );
-
             if ($run) {
-
                 $output->writeln( sprintf( 'Running Cron Task <info>%s</info>', $crontask->getName() ) );
-
-                // Set $lastrun for this crontask
-                $crontask->setLastRun( new \DateTime() );
-
                 try {
                     $commands = $crontask->getCommands();
                     foreach ($commands as $command) {
                         $output->writeln( sprintf( 'Executing command <comment>%s</comment>...', $command ) );
-
                         // Run the command
                         $this->runCommand( $command );
                     }
-
                     $output->writeln( '<info>SUCCESS</info>' );
                 } catch ( \Exception $e ) {
-                    $output->writeln( '<error>ERROR</error>' );
+                    $output->writeln(sprintf( '<error>ERROR: %s</error>', $e) );
                 }
-
-                // Persist crontask
-                $em->persist( $crontask );
+                // Set $lastrun for this crontask
+                $crontask->setLastRun( new \DateTime() );
+                $em->merge( $crontask );
+                $em->flush();
             } else {
                 $output->writeln( sprintf( 'Skipping Cron Task <info>%s</info>', $crontask->getName() ) );
             }
         }
-
-        // Flush database changes
-        $em->flush();
-
         $output->writeln( '<comment>Done!</comment>' );
     }
 

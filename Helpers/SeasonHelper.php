@@ -20,7 +20,7 @@ class SeasonHelper
 
     public function getCurrentSeason()
     {
-        $currentSeason = $this->client->UpcomingSeason();
+        $currentSeason = $this->client->UpcomingSeason([]);
         $season        = $currentSeason[0];
 
         return $season;
@@ -28,7 +28,7 @@ class SeasonHelper
 
     public function getLastSeason()
     {
-        $currentSeason = $this->client->LastCompletedSeason();
+        $currentSeason = $this->client->LastCompletedSeason([]);
         $season        = $currentSeason[0];
 
         return $season;

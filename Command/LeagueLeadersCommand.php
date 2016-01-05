@@ -93,7 +93,7 @@ class LeagueLeadersCommand extends ContainerAwareCommand
             $leagueLeaders        = $fetcher->gameLeagueLeadersByWeek( $fullSeason, $week, $position, $sortColumn );
             $leagueLeaderProgress = new ProgressBar( $output, $leagueLeaders->count() );
             $leagueLeaderProgress->setFormat(
-                "%message%\n GameLeagueLeader %current% of %max% [%bar%] %percent:3s%% \n%elapsed:6s%/n"
+                "%message%\n GameLeagueLeader %current% of %max% [%bar%] %percent:3s%% %elapsed:6s%"
             );
         } else {
             $leagueLeaders = $fetcher->seasonLeagueLeaders( $fullSeason, $position, $sortColumn );
