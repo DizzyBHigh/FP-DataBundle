@@ -24,25 +24,7 @@ class DailyFantasyPlayerBuilder
         if ( ! $currentDailyFantasyPlayer) { // check if we already have the player stored
             $currentDailyFantasyPlayer = new DailyFantasyplayer();
         }
-        $thisPlayer = $this->em->getRepository('DataBundle:Player')->find($dailyFantasyPlayer['PlayerID']);
-        if( $thisPlayer){
-            $currentDailyFantasyPlayer->setPlayer($thisPlayer);
-            $currentDailyFantasyPlayer->setDate( $this->dateHelper->parseDate( $dailyFantasyPlayer['Date'] ) );
-            $currentDailyFantasyPlayer->setShortName( $dailyFantasyPlayer['ShortName'] );
-            $currentDailyFantasyPlayer->setName( $dailyFantasyPlayer['Name'] );
-            $currentDailyFantasyPlayer->setTeam( $dailyFantasyPlayer['Team'] );
-            $currentDailyFantasyPlayer->setOpponent( $dailyFantasyPlayer['Opponent'] );
-            $currentDailyFantasyPlayer->setPosition( $dailyFantasyPlayer['Position'] );
-            $currentDailyFantasyPlayer->setSalary( $dailyFantasyPlayer['Salary'] );
-            $currentDailyFantasyPlayer->setLastGameFantasyPoints( $dailyFantasyPlayer['LastGameFantasyPoints'] );
-            $currentDailyFantasyPlayer->setProjectedFantasyPoints( $dailyFantasyPlayer['ProjectedFantasyPoints'] );
-            $currentDailyFantasyPlayer->setOpponentRank( $dailyFantasyPlayer['OpponentRank'] );
-            $currentDailyFantasyPlayer->setOpponentPositionRank( $dailyFantasyPlayer['OpponentPositionRank'] );
-            $currentDailyFantasyPlayer->setStatus( $dailyFantasyPlayer['Status'] );
-            $currentDailyFantasyPlayer->setStatusCode( $dailyFantasyPlayer['StatusCode'] );
-            $currentDailyFantasyPlayer->setStatusColor( $dailyFantasyPlayer['StatusColor'] );
-        }
-        $currentDailyFantasyPlayer->setPlayer($thisPlayer);
+        $currentDailyFantasyPlayer->setPlayer($dailyFantasyPlayer['PlayerID']);
         $currentDailyFantasyPlayer->setDate( $this->dateHelper->parseDate( $dailyFantasyPlayer['Date'] ) );
         $currentDailyFantasyPlayer->setShortName( $dailyFantasyPlayer['ShortName'] );
         $currentDailyFantasyPlayer->setName( $dailyFantasyPlayer['Name'] );

@@ -17,13 +17,12 @@ class Player
     public function __construct()
     {
         $this->contestEntries = new ArrayCollection();
-        $this->dailyFantasyPlayers = new ArrayCollection();
     }
     /**
      * @var integer
      *
      * @ORM\Column(type="integer", length=32, name="id")
-     * 
+     *
      * @ORM\Id
      */
     private $id;
@@ -315,16 +314,6 @@ class Player
      */
 
     private $injuryStatus;
-
-    /**
-     *   @ORM\ManyToMany(targetEntity="FantasyPro\GameBundle\Entity\ContestEntry", mappedBy="players")
-     */
-    private $contestEntries;
-
-    /**
-     *   @ORM\OneToMany(targetEntity="FantasyPro\DataBundle\Entity\DailyFantasyPlayer", mappedBy="player")
-     */
-    private $dailyFantasyPlayers;
 
     /**
      * Set id
@@ -1326,69 +1315,4 @@ class Player
         $this->injuryStatus = $injuryStatus;
     }
 
-
-
-    /**
-     * @return mixed
-     */
-    public function getContestEntries()
-    {
-        return $this->contestEntries;
-    }
-
-    /**
-     * @param null $ContestEntries
-     *
-     */
-    public function setContestEntries( $ContestEntries = null)
-    {
-        $this->contestEntries = $ContestEntries;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDailyFantasyPlayers()
-    {
-        return $this->dailyFantasyPlayers;
-    }
-
-    /**
-     * @param DailyFantasyPlayer $dailyFantasyPlayers
-     *
-     */
-    public function setDailyFantasyPlayers( DailyFantasyPlayer $dailyFantasyPlayers = null)
-    {
-        $this->dailyFantasyPlayers = $dailyFantasyPlayers;
-    }
-
-    /**
-     * @param DailyFantasyPlayer $dailyFantasyPlayers
-     *
-     * @return ArrayCollection
-     *
-     */
-    public function addDailyFantasyPlayers(DailyFantasyPlayer $dailyFantasyPlayers = null)
-    {
-        if(! $this->dailyFantasyPlayers->contains($dailyFantasyPlayers)){
-            $this->dailyFantasyPlayers->add($dailyFantasyPlayers);
-        }
-
-        return $this->dailyFantasyPlayers;
-    }
-
-    /**
-     * @param DailyFantasyPlayer $dailyFantasyPlayers
-     *
-     * @return ArrayCollection
-     *
-     */
-    public function removeDailyFantasyPlayers(DailyFantasyPlayer $dailyFantasyPlayers)
-    {
-        if($this->dailyFantasyPlayers->contains($dailyFantasyPlayers)){
-            $this->dailyFantasyPlayers->removeElement($dailyFantasyPlayers);
-        }
-
-        return $this->dailyFantasyPlayers;
-    }
 }

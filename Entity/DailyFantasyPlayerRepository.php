@@ -16,26 +16,28 @@ class DailyFantasyPlayerRepository extends \Doctrine\ORM\EntityRepository
 
         return $players;
     }
-    public function getAvaliablePlayersByTeam(array $homeTeams, array $awayTeams, $date){
+    public function getAvaliablePlayersByTeam(array $homeTeams, array $awayTeams, array $dateArray){
         $qb = $this->createQueryBuilder('p')
-            ->Where('p.team in (:team) AND p.opponent in (:opponent) AND p.date = :date')
+            ->Where('p.team in (:team) AND p.opponent in (:opponent) AND p.date in (:date)')
             ->orderBy('p.position', 'ASC')
-            ->setParameter('date', $date)
+            ->setParameter('date', $dateArray)
             ->setParameter('team', $homeTeams)
             ->setParameter('opponent', $awayTeams);
         return $qb;
     }
 
-    public function getPlayersByTeamQuery(array $homeTeams, array $awayTeams, $date){
+    public function getPlayersByTeamQuery(array $teamsArray, array $dateArray){
         $qb = $this->createQueryBuilder('p')
-            ->select('p')
+            ->select('DISTINCT p')
             //->where($qb->expr()->isNotNull('p.position'))
-            ->Where('p.team in (:team) AND p.opponent in (:opponent) AND p.date = :date AND p.position IS NOT NULL')
+            ->Where('p.team in (:team) AND p.date in (:date) AND p.position IS NOT NULL')
             ->orderBy('p.position', 'ASC')
-            ->setParameter('date', $date)
+            ->setParameter('date', $dateArray)
+
             //->setParameter('position', 'IS NOT NULL')
-            ->setParameter('team', $homeTeams)
-            ->setParameter('opponent', $awayTeams);
+            //->setParameter('opponent', $homeTeams)
+            ->setParameter('team', $teamsArray);
+
         return $qb;
     }
 }

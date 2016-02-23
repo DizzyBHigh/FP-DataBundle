@@ -21,8 +21,8 @@ class DailyFantasyPlayer
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Player", inversedBy="dailyFantasyPlayers")
-     * @ORM\JoinColumn(name="player")
+     *
+     * @ORM\Column(name="player")
      */
     private $player;
 

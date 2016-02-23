@@ -102,8 +102,12 @@ class DateHelper
 
         return strtoupper( $datetime->format( 'Y-M-d' ) );
     }
+    function apiDate(DateTime $date)
+    {
+        return $date->format( 'y-m-d');
+    }
 
-    function dfpDate()
+    function dfpDate(Date $date)
     {
         $tz_object = new DateTimeZone('UTC');
         $datetime  = new DateTime();
@@ -118,8 +122,6 @@ class DateHelper
      * @return string
      */
     function datetimeToHRString($date){
-        /** @var DateTime $thisTimeZone */
-        $thisDate = $date->getTimeStamp();
         /** @var DateTimeZone $thisTimeZone */
         $thisTimeZone = $date->getTimezone();
 
@@ -135,7 +137,6 @@ class DateHelper
      * @return string
      */
     function dateToHRString($date){
-        //var_dump($thisTimeZone->getName());
         $thisDateString = $date->format(" jS F Y");
 
         return $thisDateString;

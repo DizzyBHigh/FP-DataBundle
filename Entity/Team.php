@@ -39,6 +39,7 @@ class Team
      * @var integer
      *
      * @ORM\Column(type="integer", nullable=true, name="playerID")
+     * @ORM\OneToMany(targetEntity="FantasyPro\GameBundle\Entity\ContestEntry", mappedBy="def")
      */
     private $playerID;
 
@@ -167,7 +168,6 @@ class Team
      * @ORM\Column(type="integer", nullable=true, name="upcomingOpponentPositionRank")
      */
     private $upcomingOpponentPositionRank;
-
 
     /**
      * Get id
@@ -675,5 +675,23 @@ class Team
     {
         return $this->upcomingOpponentPositionRank;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getContestEntries()
+    {
+        return $this->contestEntries;
+    }
+
+    /**
+     * @param null $ContestEntries
+     *
+     */
+    public function setContestEntries( $ContestEntries = null)
+    {
+        $this->contestEntries = $ContestEntries;
+    }
+
 }
 
